@@ -4,6 +4,15 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+let mongoose = require('mongoose');
+let mongoDB = 'mongodb://test:test@ds119160.mlab.com:19160/test_library';
+
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error'));
+
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 
